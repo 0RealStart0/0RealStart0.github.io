@@ -1,6 +1,6 @@
 import Main_nav from "../components/Main_nav.js";
 import Practice from "../components/Practice.js";
-import Word from "../components/word.js";
+import Word from "../components/Word.js";
 import Card from "../components/Card.js";
 import Number from "../components/Number.js";
 import Image from "../components/Image.js";
