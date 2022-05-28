@@ -1,5 +1,5 @@
 import { render } from "../router/router.js";
-import Word from "../components/ord.js";
+import Word from "../components/Word.js";
 import Card from "../components/Card.js";
 import Number from "../components/Number.js";
 import Image from "../components/Image.js";
