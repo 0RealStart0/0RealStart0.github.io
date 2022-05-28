@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'NeoDunggeunmo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+/* .nes-btn,
+.nes-input,
+.nes-select select,
+.nes-select,
+.nes-table.is-bordered,
+.nes-table.is-bordered.is-dark,
+.nes-progress,
+.nes-container.is-rounded,
+.nes-textarea {
+    border-image-repeat: stretch;
+} */
+
+/* * {
+    /* box-sizing: border-box; */
+    /* box-sizing: border-box; */
+  /* } */ 
+
+body {
+    font-family: 'NeoDunggeunmo', sans-serif;
+    letter-spacing: 0.05em;
+    /* font-size: calc(var(--global-font-size)*1.1); */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+  }
+.components-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* 섹션 배경색 설정(나중에 겹치면 클래스 설정해야할듯? */
+main {
+    background-color: aliceblue;
+}
+/* 설정부분 마진 */
+.setting-fieldset > fieldset{
+    margin: 0 6px 6px 6px;
+}
+
+/* 전체 넓이 약간 넓힘 var(--page-width)기본값 */
+.container {
+    max-width: calc(var(--page-width)*1.2);
+}
+
+/* 게임 전체 창 플렉스 설정 컬럼으로 */
+.game-container{
+    display: flex;
+    flex-direction: column;
+    
+    /* background-color: var(--code-bg-color); */
+    /* background-color: aliceblue; */
+}
+
+/* 게임 상태창 정렬과 마진설정 */
+.game-status{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:calc(var(--global-font-size)*0.4); 
+    margin-left:calc(var(--global-font-size)*0.4); 
+    margin-right:calc(var(--global-font-size)*0.4); 
+}
+
+/* 초시계 세로 정렬 */
+.game-status span{
+    line-height: 2.3em;
+}
+
+/* 테이블 칸들 분리 */
+table{
+    /* font-size: calc(var(--global-font-size)*1.2); */
+    border-collapse:separate;
+}
+
+/* 테이블 이상한 설정 제거 */
+table tbody td:first-child {
+    
+    font-weight: normal;
+    color: var(--font-color);
+    
+}
+
+.progress-bar{
+    width: 40%;
+}
+
+/* 화살표 플렉스 설정 */
+.practice-arrow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+/* 화살표 버튼 간격 */
+.practice-arrow > .btn{
+    margin: 0 0.3em;
+}
+
+
+/* 카드 폰트 간격 */
+.card-table{
+    font-size: calc(var(--global-font-size)*1.5);
+    border-spacing: calc(var(--global-font-size)*0.5);
+    margin: 0.8em 0;
+}
+/* 카드 넓이 글자 정렬*/
+.card-table td{
+    /* font-size: calc(var(--global-font-size)*1.5); */
+    width: calc(var(--global-font-size)*3);
+    text-align: center;
+}
+
+/* 단어 테이블 마진 설정을 위해 */
+.table-container{
+    margin: 0 6px 0 6px;
+}
+
+/* 숫자 테이블 상하 마진 */
+.number-table{
+    margin: 16px 0 21px 0;
+}
+
+/* 숫자 테이블 전체 테두리제거후 밑선만 추가 */
+.number-table tr, .number-table td{
+    border: none;
+    border-bottom: 1px solid;
+}
+/* 숫다 테이블 td 패딩조절 */
+.number-table td{
+    padding-bottom: 0;
+    padding-top: 10px;
+}
+
+/* 단어 리콜 테이블 인풋 안보이게 설정 */
+.recall-word-table input{
+    padding: 0px;
+    background-color: aliceblue;
+    border: 0;
+ font-family: inherit;
+}
+
+/* 단어 리콜 테이블 인풋 안보이게 설정 */
+.recall-word-table input:focus{     
+ border: 0;
+ /* font-family: inherit; */
+}
+
+
+/* 단어 게임창 최대 넓이 */
+.game-container.word{
+    min-width: 765.7px;
+}
+/* 카드 게임창 최대 넓이 */
+.game-container.card{
+    max-width: 685.8px;
+}
+
+
+.recall-card-table td{
+    width: 45px;
+    height: 75px;
+}
+.recall-card-selector{
+    margin-left: 7px;
+}
+
+.recall-card-selector :last-child span{
+    padding-top: 4.8px;
+}
+
+.game-container.number{
+    min-width: 795.6px;
+}
+
+.recall-number-table td{
+    width: 19.75px;
+    height: 36.2px;
+}
+
+/* 단어 암기 시점 td 최소 넓이 설정 */
+.table-container.word td{
+    min-width: 123.75px;
+}
+.recall-word-table td{
+    max-width: 123.75px;
+}
+
+.progress-bar-filled{
+    transition: width 0.9s ease;
+}
+
+/* 카드 컨테이너 마진 제거 */
+.table-container.card{
+    margin:0;
+}    
+/* 테이블에 빗금 */
+.slash {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="100%" x2="100%" y2="0" stroke="gray" /></svg>');
+  }
+
+.backslash {
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="gray" /></svg>');
+}
+
+/* .number-table.number-list{
+    max-width: 50%;
+    margin: 0 auto;
+}
+.number-set td{
+    border: 1px solid; 
+    padding-top: 5px;
+} */
+
+/* 숫다 테이블 td 패딩조절 */
+/* .number-table td{
+    padding-bottom: 0;
+    padding-top: 10px;
+} */
+
+
+/* 테이블 컨테이너 마진 삭제 */
+.table-container.number{
+    margin: 0;
+}
+
+/* 숫자테이블 글씨 키움 */
+.number-table {
+    font-size: 18px;
+}
+/* 숫자 테이블 답안 최소크기 맞춤 */
+.number-table.recall-number-table td{
+    min-width: 19.75px;
+    min-height: 36.2px;
+}
+
+.table-container.word table{
+    font-size: 18px;
+}
+
+.recall-word-table{
+    font-size: 18px;
+}
