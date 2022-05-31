@@ -19,10 +19,10 @@ export default class Image{
         [...this.$parent.querySelectorAll('.form-group')].forEach((div)=>{
             div.style.visibility = 'hidden';
         })
-        this.$parent.querySelector('.btn').textContent = '준비중 입니다...';
+        this.$parent.querySelector('.btn').textContent = '준비중입니다...';
         this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('준비중 입니다...');
+            alert('준비중입니다...');
         })
         
 
