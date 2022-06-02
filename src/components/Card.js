@@ -7,26 +7,18 @@ export default class Card {
     constructor($parent) {
         this.$parent = $parent;
         this.$parent.innerHTML = '';
-        this.render();
-
         this.$record;
         this.data = {};
-
+        this.render();
+        
+        
         this.$gamecontainer = document.createElement('div');
         this.$gamecontainer.className = 'game-container card';
 
     }
-
+    
     render() {
-        this.$parent.innerHTML = setting('스피드 카드');
-        this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const { group, ready, num, graph } = e.target;
-            console.log(group.value, ready.value, num.checked, graph.checked);
-            this.data.setting = { group: group.value, ready: ready.value, timeShow: num.checked, graphShow: graph.checked };
-            this.data.cardList = randomCard();
-            this.phase1();
-        })
+        this.$parent.appendChild(setting.bind(this)(['card','스피드 단어'],{fnc:randomCard},false));
     }
 
     phase1() {

@@ -1,9 +1,15 @@
-export const setting = (keyword)=>{ 
-    return `
+// function makeElement(element) {
+//     return document.createElement(element);
+// }
+import { reqRandomWord } from "../api/api.js";
+
+export function setting (keyword,fncSet,isPromise) {
+
+    const template = `
 <div class="setting-fieldset">
 <form>
     <fieldset>
-        <legend>${keyword} 설정</legend>
+        <legend>${keyword[1]} 설정</legend>
         <div class="form-group">
             <label style="width: 1.5em">그룹 갯수 - </label>
             <select name="group">
@@ -38,10 +44,30 @@ export const setting = (keyword)=>{
         <button class="btn btn-primary" type="submit">시작하기</button>
     </fieldset>
 </form>
-</div>`}
+</div>`
+let $template = document.createElement('template');
+$template.innerHTML = template;
+console.log('setting 호출!',this);
+$template.content.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const { group, ready, num, graph } = e.target;
+    console.log(group.value, ready.value, num.checked, graph.checked,this);
+    this.data.setting = { group: group.value, ready: ready.value, timeShow: num.checked, graphShow: graph.checked };
+    
+    
+    if(isPromise){
+        this.data[keyword[0]+'List'] = await fncSet.fnc(fncSet.num);
+    }else{
+        this.data[keyword[0]+'List'] = fncSet.fnc(fncSet.num);
+    }
+    this.phase1();
+})
+
+return $template.content;
+}
 
 // time.padStart(2,'0')
-export const ready =`
+export const ready = `
 <div class="game-status">
     <button class="btn btn-primary">시작</button>
     <div class="ready-time">

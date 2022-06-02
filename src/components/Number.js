@@ -14,28 +14,20 @@ export default class Number {
     constructor($parent) {
         this.$parent = $parent;
         this.$parent.innerHTML = '';
-        this.render();
-
         this.$record;
         this.data = {};
-
+        this.render();
+        
+        
         this.$gamecontainer = document.createElement('div');
         this.$gamecontainer.className = 'game-container number';
-
+        
     }
-
-
+    
+    
     render() {
-        this.$parent.innerHTML = setting('스피드 넘버');
-        this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const { group, ready, num, graph } = e.target;
-            console.log(group.value, ready.value, num.checked, graph.checked);
-            this.data.setting = { group: group.value, ready: ready.value, timeShow: num.checked, graphShow: graph.checked };
-            this.data.numberList = randomNumber(400);
-            // console.log(this.data.numberList)
-            this.phase1();
-        })
+        this.$parent.appendChild(setting.bind(this)(['number','스피드 넘버'],{fnc:randomNumber,num:400},false));
+
     }
 
     phase1() {
