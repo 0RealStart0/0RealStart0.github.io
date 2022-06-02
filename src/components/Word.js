@@ -66,32 +66,9 @@ export default class Word {
         this.$gamecontainer.innerHTML = ready + wordTable;
         this.$parent.appendChild(this.$gamecontainer);
 
-        phase1Helper.bind(this)('white',groupLength);
+        phase1Helper.bind(this)('white',groupLength,'word');
     }
 
-
-
-    phase2() {
-        console.log('페이즈2');
-
-        const tpl = document.createElement('template');
-        tpl.innerHTML = memory;
-        const fragment = tpl.content;
-
-        this.$gamecontainer.replaceChild(fragment, this.$gamecontainer.querySelector('.game-status'));
-        this.$gamecontainer.querySelector('.table-container.word').style.visibility = 'visible';
-        this.$gamecontainer.querySelector('.practice-arrow').style.visibility = 'visible';
-        show.bind(this)();//타이머 그래프 설정에 따라 감춤
-
-        let startTime = new Date().getTime();
-        let interval = timer.bind(this)(300, this.$gamecontainer, this.phase3.bind(this));
-        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
-            clearInterval(interval);
-            let endTime = new Date().getTime();
-            let record = endTime - startTime;
-            this.phase3(parseInt(record));
-        });
-    }
     phase3(record) {
         console.log('페이즈3!');
         this.$gamecontainer.innerHTML = '';

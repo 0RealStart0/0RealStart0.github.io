@@ -1,3 +1,5 @@
+import { setting, ready, memory, recall, result }  from '../components/game_components.js'
+
 export function show() {
     const { timeShow, graphShow } = this.data.setting;
     if (timeShow) {
@@ -95,7 +97,7 @@ export function arrowBtnEvent(groupLength, tdSet, color) {
     }
 }
 
-export function phase1Helper(color, groupLength){
+export function phase1Helper(color, groupLength, name){
     let tdSet = Array.from(Array(groupLength), () => new Array());
     [...this.$gamecontainer.getElementsByTagName('td')].forEach((td) => {
         tdSet[td.dataset.group].push(td);
@@ -105,10 +107,30 @@ export function phase1Helper(color, groupLength){
     this.$gamecontainer.querySelector('.practice-arrow').addEventListener('click',arrowBtnEvent(groupLength,tdSet,color));
 
     let $progress = this.$gamecontainer.querySelector('.game-status');
-    let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase2.bind(this));
+    let interval = timer.bind(this)(this.data.setting.ready, $progress, phase2.bind(this));
     $progress.querySelector('.btn').addEventListener('click', (e) => {
         clearInterval(interval);
-        this.phase2();
+        phase2.bind(this)();
     });
-
+    function phase2() {
+        console.log('페이즈2');
+    
+        const tpl = document.createElement('template');
+        tpl.innerHTML = memory;
+        const fragment = tpl.content;
+    
+        this.$gamecontainer.replaceChild(fragment, this.$gamecontainer.querySelector('.game-status'));
+        this.$gamecontainer.querySelector(`.table-container.${name}`).style.visibility = 'visible';
+        this.$gamecontainer.querySelector('.practice-arrow').style.visibility = 'visible';
+        show.bind(this)();//타이머 그래프 설정에 따라 감춤
+    
+        let startTime = new Date().getTime();
+        let interval = timer.bind(this)(300, this.$gamecontainer, this.phase3.bind(this));
+        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
+            clearInterval(interval);
+            let endTime = new Date().getTime();
+            let record = endTime - startTime;
+            this.phase3(parseInt(record));
+        });
+    }
 }
