@@ -95,3 +95,20 @@ export function arrowBtnEvent(groupLength, tdSet, color) {
     }
 }
 
+export function phase1Helper(color, groupLength){
+    let tdSet = Array.from(Array(groupLength), () => new Array());
+    [...this.$gamecontainer.getElementsByTagName('td')].forEach((td) => {
+        tdSet[td.dataset.group].push(td);
+    });
+    groupColorChange(tdSet, 0, 0, color);
+
+    this.$gamecontainer.querySelector('.practice-arrow').addEventListener('click',arrowBtnEvent(groupLength,tdSet,color));
+
+    let $progress = this.$gamecontainer.querySelector('.game-status');
+    let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase2.bind(this));
+    $progress.querySelector('.btn').addEventListener('click', (e) => {
+        clearInterval(interval);
+        this.phase2();
+    });
+
+}

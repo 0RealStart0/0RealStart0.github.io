@@ -1,6 +1,6 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
 import { reqRandomWord } from "../api/api.js";
-import { show, timer, groupColorChange, arrowBtnEvent } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent,phase1Helper } from "../utils/utils.js";
 
 export default class Word {
     constructor($parent) {
@@ -64,28 +64,9 @@ export default class Word {
                                 `
 
         this.$gamecontainer.innerHTML = ready + wordTable;
-
-        //td 모아서 인덱스 그룹별로 모으기
-        let tdSet = Array.from(Array(groupLength), () => new Array());
-        [...this.$gamecontainer.getElementsByTagName('td')].forEach((td) => {
-            tdSet[td.dataset.group].push(td);
-        });
-
-        //버튼 이벤트 추가
-        // let now = 0;
-        // let before = 0;
-        groupColorChange(tdSet, 0, 0, 'white');
-        this.$gamecontainer.querySelector('.practice-arrow').addEventListener('click',arrowBtnEvent(groupLength,tdSet));
-
         this.$parent.appendChild(this.$gamecontainer);
 
-        let $progress = this.$gamecontainer.querySelector('.game-status');
-        let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase2.bind(this));
-        $progress.querySelector('.btn').addEventListener('click', (e) => {
-            clearInterval(interval);
-            this.phase2();
-        });
-
+        phase1Helper.bind(this)('white',groupLength);
     }
 
 
@@ -149,11 +130,9 @@ export default class Word {
         const recordSeconds = Math.floor(record / 10) / 100;
         const minutes = Math.floor(recordSeconds / 60);
         const seconds = (recordSeconds % 60).toFixed(2);
-        console.log(record, '밀리초', recordSeconds);
         $record.textContent = `기록 ${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
         $record.dataset.record = record;
         $gameStatus.insertBefore($record, $gameStatus.lastElementChild);
-
 
         let $progress = this.$gamecontainer.querySelector('.game-status');
         let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase4.bind(this));
@@ -183,6 +162,15 @@ export default class Word {
         $gameStatus.insertBefore($record, $gameStatus.querySelector('.progress-bar'));
         show.bind(this)();//타이머 그래프 설정에 따라 감춤
 
+        //타이머 시작 
+        let $progress = this.$gamecontainer.querySelector('.game-status');
+        let interval = timer.bind(this)(600, $progress, this.phase5.bind(this));
+
+        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
+            clearInterval(interval);
+            this.phase5(this.$record);
+        });
+
         //input 요소 수집후 탭인덱스로 정렬
         let tdSet = [...this.$gamecontainer.getElementsByTagName('input')].sort((a,b)=>{
             return a.tabIndex - b.tabIndex;
@@ -211,14 +199,7 @@ export default class Word {
 
 
 
-        //타이머 시작 
-        let $progress = this.$gamecontainer.querySelector('.game-status');
-        let interval = timer.bind(this)(600, $progress, this.phase5.bind(this));
-
-        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
-            clearInterval(interval);
-            this.phase5(this.$record);
-        });
+      
 
     }
 
