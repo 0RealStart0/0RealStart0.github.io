@@ -1,5 +1,5 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
-import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper } from "../utils/utils.js";
 
 function randomNumber(n) {
     let arr = [];
@@ -124,27 +124,8 @@ export default class Number {
         </div>
 
        `
-
-        this.$gamecontainer.innerHTML = ready + recallNumberTable;
-        const $gameStatus = this.$gamecontainer.querySelector('.game-status');
-        const $record = document.createElement('span');
-        record = record ? record : 300000;
-        const recordSeconds = Math.floor(record / 10) / 100;
-        const minutes = Math.floor(recordSeconds / 60);
-        const seconds = (recordSeconds % 60).toFixed(2);
-        $record.textContent = `기록 ${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-        $record.dataset.record = record;
-        $gameStatus.insertBefore($record, $gameStatus.lastElementChild);
-
-        let $progress = this.$gamecontainer.querySelector('.game-status');
-        let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase4.bind(this));
-
-        this.$record = $record;
-        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
-            clearInterval(interval);
-            this.phase4(this.$record);
-        });
-
+       this.$gamecontainer.innerHTML = ready + recallNumberTable;
+       phase3Helper.bind(this)(record);
     }
 
     phase4($record) {

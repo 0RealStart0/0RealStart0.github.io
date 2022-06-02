@@ -1,6 +1,6 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
 // import { reqRandomWord } from "../api/api.js";
-import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper } from "../utils/utils.js";
 import { randomCard, getCardSet } from "../../data/card.js";
 
 export default class Card {
@@ -128,25 +128,7 @@ export default class Card {
                         `
 
         this.$gamecontainer.innerHTML = ready + recallCardTable;
-        const $gameStatus = this.$gamecontainer.querySelector('.game-status');
-        const $record = document.createElement('span');
-        record = record ? record : 300000;
-        const recordSeconds = Math.floor(record / 10) / 100;
-        const minutes = Math.floor(recordSeconds / 60);
-        const seconds = (recordSeconds % 60).toFixed(2);
-        $record.textContent = `기록 ${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-        $record.dataset.record = record;
-        $gameStatus.insertBefore($record, $gameStatus.lastElementChild);
-
-        let $progress = this.$gamecontainer.querySelector('.game-status');
-        let interval = timer.bind(this)(this.data.setting.ready, $progress, this.phase4.bind(this));
-
-        this.$record = $record;
-        this.$gamecontainer.querySelector('.game-status').querySelector('.btn').addEventListener('click', (e) => {
-            clearInterval(interval);
-            this.phase4(this.$record);
-        });
-
+        phase3Helper.bind(this)(record);
     }
 
     phase4($record) {
