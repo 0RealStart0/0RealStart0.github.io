@@ -6,26 +6,18 @@ export default class Word {
     constructor($parent) {
         this.$parent = $parent;
         this.$parent.innerHTML = '';
-        this.render();
-
         this.$record;
         this.data = {};
+        this.render();
+        
 
         this.$gamecontainer = document.createElement('div');
         this.$gamecontainer.className = 'game-container word';
-
+        
     }
 
     render() {
-        this.$parent.innerHTML = setting('무작위 단어');
-        this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const { group, ready, num, graph } = e.target;
-            console.log(group.value, ready.value, num.checked, graph.checked);
-            this.data.setting = { group: group.value, ready: ready.value, timeShow: num.checked, graphShow: graph.checked };
-            this.data.wordList = await reqRandomWord(90);
-            this.phase1();
-        })
+        this.$parent.appendChild(setting.bind(this)(['word','무작위 단어'],{fnc:reqRandomWord,num:90},true));
     }
 
     phase1() {
