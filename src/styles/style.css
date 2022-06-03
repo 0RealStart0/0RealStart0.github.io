@@ -77,7 +77,9 @@
     align-items: center;
     flex-direction: column; */
   }
-
+.dark-mode{
+    cursor: pointer;
+}
 .components-flex{
     display: flex;
     flex-direction: row;

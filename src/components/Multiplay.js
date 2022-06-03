@@ -8,7 +8,7 @@ export default class Multiplay{
         this.render();
         this.$child = $parent.querySelector('#game-section');
         this.component;
-
+        
         this.$parent.querySelector('#practice-menu').addEventListener('click',(e)=>{
             if(e.target.nodeName !=='A')return;
             e.preventDefault();

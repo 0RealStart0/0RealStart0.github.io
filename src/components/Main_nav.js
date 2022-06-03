@@ -1,38 +1,81 @@
 import { render } from '../router/router.js';
 
 export default class Main_nav {
-    constructor($target, componentArr) {
+    constructor($target) {
         this.$target = $target;
+        this.$nav;
+        this.$child;
+        
+        this.render();
+        this.childComponent;
+    }
+    
+
+    render() {
+        console.log('render');
         this.$target.innerHTML = '';
-        this.$container = document.createElement('div');
-        this.$container.className = 'container';
-        this.$target.appendChild(this.$container);
+        this.$nav = document.createElement('div');
+        this.$nav.className = 'container';
+        this.$target.appendChild(this.$nav);
         this.$child = document.createElement('div');
         this.$child.className = 'container';
-
+        
         this.$target.appendChild(this.$child);
-        this.render();
-
-        this.component;
-
-        this.$container.addEventListener('click', (e) => {
+        
+        const templet = `<div class="terminal-nav">
+        <div class="terminal-logo">
+        <div class="logo terminal-prompt"><a href="/" class="no-style">Memory Sport</a></div>
+                            </div>
+                            <nav class="terminal-menu">
+                            <ul>
+                                <li><a class="menu-item" href="/practice">연습하기</a></li>
+                                <li><a class="menu-item" href="/multiplay">대결하기</a></li>
+                                <li class="dark-mode">⚫️</li>
+                                </ul>
+                            </nav>
+                            </div>`;
+                            this.$nav.innerHTML = templet;
+                            
+                            this.$nav.addEventListener('click', (e) => {
             if (e.target.nodeName !== 'A') return;
-            if (e.target.className !== 'menu-item') return;
+            // if (e.target.className !== 'menu-item') return;
             e.preventDefault();
-            if (e.target.href === location.pathname) return;
             history.pushState(null, null, e.target.href);
-            this.component = render();
-            this.component = new this.component(this.$child);
-
+            console.log(e.target.href,location.pathname);
+            // if (e.target.href.pathname === location.pathname) {
+                //     console.log('리턴');
+            //     return;
+            // }
+            if(location.pathname ==='/'){
+                // this.render();
+                this.resetChild();
+            }else{
+                const {component} = render();
+                this.childComponent = new component(this.$child);
+                // this.componentArr[1] = this.childComponent;
+            }
+            
         });
-        this.$dark = this.$container.querySelector('.dark-mode');
-
-        this.currentMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const $dark = this.$nav.querySelector('.dark-mode');
+        
+        if(!this.currentMode){
+            this.currentMode = window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
             : "light";
+        }else{
+            if (this.currentMode === 'dark') {
+                document.querySelector('body').className = 'dark';
+                this.currentMode = 'dark';
+                $dark.textContent = '⚫️';
+            } else {
+                document.querySelector('body').className = 'light';
+                this.currentMode = 'light';
+                $dark.textContent = '⚪️';
+            }
+        }
 
-
-        this.$dark.addEventListener('click', (e) => {
+        
+        $dark.addEventListener('click', (e) => {
             if (this.currentMode === 'dark') {
                 document.querySelector('body').className = 'light';
                 this.currentMode = 'light';
@@ -43,29 +86,11 @@ export default class Main_nav {
                 e.target.textContent = '⚪️';
             }
         });
-
-
     }
-
-
-    render() {
-        this.$container.innerHTML = '';
-        const templet = `<div class="terminal-nav">
-                            <div class="terminal-logo">
-                            <div class="logo terminal-prompt"><a href="/" class="no-style">Memory Sport</a></div>
-                            </div>
-                            <nav class="terminal-menu">
-                            <ul>
-                                <li><a class="menu-item" href="/practice">연습하기</a></li>
-                                <li><a class="menu-item" href="/multiplay">대결하기</a></li>
-                                <li><a class="dark-mode">⚫️</a></li>
-                            </ul>
-                            </nav>
-                        </div>`;
-        this.$container.innerHTML = templet;
-        // this.$container.appendChild(this.$child);
-        console.log('컴포넌트 실행')
+    
+    resetChild(){
+        console.log('reset');
+        this.$child.innerHTML = '';
     }
-
 
 }

@@ -9,34 +9,30 @@ export default class App {
         // console.log(this.$target);
         // this.componentArr = [null,null,null];
         this.component;
-        this.main_nav;
+        // this.main_nav;
         this.init();
+        this.childComponent
+        // this.componentArr = ['','',''];
 
-
+    }
+    
+    async init() {
+        this.childComponent = new Main_nav(this.$target);
+        // this.component = new this.component(this.$target);
+        // this.componentArr[0] = this.component;
         window.addEventListener('popstate', (e) => {
             e.preventDefault();
             // console.log(location.pathname, 'popstate');
-
             if (location.pathname === '/') {
-                this.init();
+                this.childComponent.resetChild();
             } else {
-                this.result = render();
-                if (!this.result) {
+                const {component} = render();
+                if (!component) {
                     history.pushState(null, null, '/');
                 } else{
-                    this.component = new this.result(this.main_nav.$child);
+                    this.component = new component(this.childComponent.$child);
                 }
-                
-
             }
-
         });
     }
-
-    async init() {
-        this.main_nav = new Main_nav(this.$target);
-        // this.component = new this.component(this.$target);
-        // this.componentArr[0] = this.component;
-    }
-
 }
