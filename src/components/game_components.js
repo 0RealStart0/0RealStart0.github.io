@@ -47,11 +47,9 @@ export function setting (keyword,fncSet,isPromise) {
 </div>`
 let $template = document.createElement('template');
 $template.innerHTML = template;
-console.log('setting 호출!',this);
 $template.content.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
     e.preventDefault();
     const { group, ready, num, graph } = e.target;
-    console.log(group.value, ready.value, num.checked, graph.checked,this);
     this.data.setting = { group: group.value, ready: ready.value, timeShow: num.checked, graphShow: graph.checked };
     
     

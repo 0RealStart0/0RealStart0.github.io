@@ -24,10 +24,8 @@ export default class Practice{
             // this.component = render();
             // this.component = new this.component(this.$child);
 
-            console.log('타겟',e.target.dataset.name);
             // 라우터 없이 바로
             this.component = this.componentSet[e.target.dataset.name];
-            console.log(this.componentSet[e.target.dataset.name])
             this.component = new this.component(this.$child);
         })
     

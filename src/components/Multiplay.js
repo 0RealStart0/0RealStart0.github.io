@@ -7,20 +7,6 @@ export default class Multiplay{
 
         this.render();
         this.$child = $parent.querySelector('#game-section');
-        let ready = setting('대결하기');
-        this.$child.innerHTML = ready;
-
-        [...this.$child.querySelectorAll('.form-group')].forEach((div)=>{
-            div.style.visibility = 'hidden';
-        })
-        this.$parent.querySelector('.btn').textContent = '준비중입니다...';
-        this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            alert('준비중입니다...');
-        })
-
-        // console.log(this.$child);
-        
         this.component;
 
         this.$parent.querySelector('#practice-menu').addEventListener('click',(e)=>{
@@ -54,6 +40,7 @@ export default class Multiplay{
     </div>`;
 
         this.$parent.innerHTML = templet;
+        alert('중비중입니다...');
 
        
     }

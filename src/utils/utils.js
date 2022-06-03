@@ -1,5 +1,7 @@
 import { setting, ready, memory, recall, result }  from '../components/game_components.js'
 
+export const groupColor = 'var(--group-color)'
+
 export function show() {
     const { timeShow, graphShow } = this.data.setting;
     if (timeShow) {
@@ -47,9 +49,7 @@ export function timer(time, $element, fnc) {
 
         if ($progerssBar) {
             $progerssBar.style.width = Math.round((time / startTime) * 10000) / 100 + '%';
-            // console.log('빠~',progerssBar.style.width)
         }
-        // console.log('인터벌', minutes, seconds);
         if (time === 0) {
             clearInterval(interval);
             fnc(this.$record);
@@ -103,7 +103,6 @@ export function phase1Helper(color, groupLength, name){
         tdSet[td.dataset.group].push(td);
     });
     groupColorChange(tdSet, 0, 0, color);
-
     this.$gamecontainer.querySelector('.practice-arrow').addEventListener('click',arrowBtnEvent(groupLength,tdSet,color));
 
     let $progress = this.$gamecontainer.querySelector('.game-status');

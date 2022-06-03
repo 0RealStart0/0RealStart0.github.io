@@ -1,6 +1,6 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
 // import { reqRandomWord } from "../api/api.js";
-import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper,groupColor } from "../utils/utils.js";
 import { randomCard, getCardSet } from "../../data/card.js";
 
 export default class Card {
@@ -68,7 +68,7 @@ export default class Card {
         this.$gamecontainer.innerHTML = ready + cardTable;
         this.$parent.appendChild(this.$gamecontainer);
 
-        phase1Helper.bind(this)('white',groupLength,'card');
+        phase1Helper.bind(this)(groupColor,groupLength,'card');
     }
 
     phase3(record) {
@@ -163,7 +163,7 @@ export default class Card {
             return a.dataset.index - b.dataset.index;
         });
 
-        elementColorChange(tdSet, 0, 0, 'white');
+        elementColorChange(tdSet, 0, 0, 'var(--group-color)');
 
         //골라 넣을 카드 세트
         let cardSet = getCardSet();
@@ -199,7 +199,7 @@ export default class Card {
                 
                 }
                 
-                elementColorChange(tdSet, index, now, 'white');
+                elementColorChange(tdSet, index, now, groupColor);
                 now = index;
             }
             // console.log(!tdSet[now].dataset.card);
@@ -255,10 +255,10 @@ export default class Card {
 
                 // console.log('현재 인덱스',now)
                 if((now+1)>=tdSet.length){
-                    elementColorChange(tdSet, 0, now, 'white');
+                    elementColorChange(tdSet, 0, now, groupColor);
                     now = 0;
                 }else{
-                    elementColorChange(tdSet, now+1, now, 'white');
+                    elementColorChange(tdSet, now+1, now, groupColor);
                     now = now + 1;
                 }
                 // console.log('변경후 인덱스',now)
@@ -276,7 +276,6 @@ export default class Card {
         let resultSet = [...this.$gamecontainer.querySelector('.card-table').getElementsByTagName('td')].map((td)=>{
             return [td.dataset.card,parseInt(td.dataset.index)];
         });
-        console.log(resultSet.length,"결과 크기");
         const cardList = this.data.cardList;
         const total = cardList.length;
         let count = total;

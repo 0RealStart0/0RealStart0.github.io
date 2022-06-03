@@ -15,16 +15,16 @@ export default class Image{
     }
 
     render(){
-        this.$parent.innerHTML = setting('랜덤 이미지');
-        [...this.$parent.querySelectorAll('.form-group')].forEach((div)=>{
-            div.style.visibility = 'hidden';
-        })
-        this.$parent.querySelector('.btn').textContent = '준비중입니다...';
-        this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            alert('준비중입니다...');
-        })
-        
+        // this.$parent.innerHTML = setting('랜덤 이미지');
+        // [...this.$parent.querySelectorAll('.form-group')].forEach((div)=>{
+        //     div.style.visibility = 'hidden';
+        // })
+        // this.$parent.querySelector('.btn').textContent = '준비중입니다...';
+        // this.$parent.querySelector('.setting-fieldset').addEventListener('submit', async (e) => {
+        //     e.preventDefault();
+        //     alert('준비중입니다...');
+        // })
+        alert('준비중입니다...');
 
     }
 

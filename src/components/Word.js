@@ -1,6 +1,6 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
 import { reqRandomWord } from "../api/api.js";
-import { show, timer, groupColorChange, arrowBtnEvent,phase1Helper,phase3Helper } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent,phase1Helper,phase3Helper,groupColor } from "../utils/utils.js";
 
 export default class Word {
     constructor($parent) {
@@ -66,7 +66,7 @@ export default class Word {
         this.$gamecontainer.innerHTML = ready + wordTable;
         this.$parent.appendChild(this.$gamecontainer);
 
-        phase1Helper.bind(this)('white',groupLength,'word');
+        phase1Helper.bind(this)(groupColor,groupLength,'word');
     }
 
     phase3(record) {
@@ -167,7 +167,6 @@ export default class Word {
         let resultSet = [...this.$gamecontainer.getElementsByTagName('input')].map((input)=>{
             return [input.value.trim(),parseInt(input.tabIndex)-1];
         });
-        // console.log(resultSet);
 
         const wordList = this.data.wordList;
         const total = wordList.length;
@@ -239,14 +238,9 @@ export default class Word {
 
         //버튼 이벤트
         let falseSet = [...this.$gamecontainer.querySelector('.table-container.word').getElementsByClassName('false')]
-        // console.log(this.$gamecontainer.querySelector('.table-container.word'))
-        // console.log(falseSet);
         let test = [...this.$gamecontainer.querySelector('.table-container.word').getElementsByClassName('falsesd')];
-        console.log(test.length,'test');
         this.$gamecontainer.querySelector('.show-answer').addEventListener('click',(e)=>{
             if (e.target.nodeName !== 'BUTTON') return;
-            console.log('버트이벤트',e.target.value);
-            console.log(falseSet.length,'배열갯수');
             if(falseSet.length>0){
                 if(e.target.value==="true"){
                     falseSet.forEach((span)=>{
@@ -262,41 +256,28 @@ export default class Word {
             }
         });
         //초 소숫점 2자리까지 수정 OK
-
         //준비 카운트 구현 -> 다음 페이즈 입력창 보여주기 + 상단에 기록 표기 + 카운트 시작 OK
         //셋팅에 따라서 숫자와 빠 안보여주기 OK
-
         //시간 1분 남았을때 색 변화(숫자와 바 둘다)OK
         //  타이머 함수와 타이머 감추는 함수 모듈로 만들기 OK
-
-
         // 암기할때 그룹만큼 색상 보여주고 버튼으로 이동 (속도문제) OK
-        
-        // 색상보여주기 키보드랑 연동
-        
         // 리콜시에 칸 이동 포커스 이벤트 등등 OK
         // 결과 보여주기 OK
-
-          //버튼 누르면 정답 오답 보여주기 OK
-        // 마우스 클릭하면 정답 오답 보여주기 중 택?
-
+        //버튼 누르면 정답 오답 보여주기 OK
+        
         // 게임중에 현재 하는 게임에 배경색 설정 + 메인화면 깜빡이는거 멈춤
+        // 색상보여주기 키보드랑 연동
+        // 입력창에 숫자 보여주기 
+        // 복사 방지 드래그 방지
+        // 확인버튼 누르면 메인페이지(드래그 효과 준 경우 되돌리기 )
 
         //----------------옵션 
         // 타이머 진행중에 벗어나면 인터벌 종료, 페이지 벗어나도 타이머 끝나면 다음으로 진행되는 경우
         // 설정이후에 벗어날때 알림창으로 확인받기
         // 유틸 this문제 없이 작동 하는지 
 
-        // 입력창에 숫자 보여주기 
 
-        //타이머 끝날때까지 있으면 기록은 타이머에 주어진 시간으로 넘기기 -> 이러면 대기타이머에서도 기록이 넘어감
-        // 아니면 기본 시간을this로 남겨서 타이머 넘어가면 기본 시간을 기록으로 넘기도록?
-        //포커스 이동시 인풋에서 포커스 위치 (앞?뒤?드래그?)
-        //복사 방지 드래그 방지
-        
-      
 
-        // 확인버튼 누르면 메인페이지(드래그 효과 준 경우 되돌리기 )
         
         
     }

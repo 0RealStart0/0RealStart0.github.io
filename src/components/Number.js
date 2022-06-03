@@ -1,5 +1,5 @@
 import { setting, ready, memory, recall, result } from "./game_components.js";
-import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper } from "../utils/utils.js";
+import { show, timer, groupColorChange, arrowBtnEvent, elementColorChange, phase1Helper, phase3Helper, groupColor } from "../utils/utils.js";
 
 function randomNumber(n) {
     let arr = [];
@@ -75,7 +75,7 @@ export default class Number {
         this.$gamecontainer.innerHTML = ready + numberTable;
         this.$parent.appendChild(this.$gamecontainer);
 
-        phase1Helper.bind(this)('#FFD814',groupLength, 'number');
+        phase1Helper.bind(this)(groupColor,groupLength, 'number');
     }
 
     phase3(record) {
@@ -160,7 +160,7 @@ export default class Number {
             return a.dataset.index - b.dataset.index;
         });
 
-        elementColorChange(tdSet, 0, 0, '#FFD814');
+        elementColorChange(tdSet, 0, 0, groupColor);
 
         //골라 넣을 카드 세트
         // let cardSet = getCardSet();
@@ -172,41 +172,40 @@ export default class Number {
         $numberTable.addEventListener('click', (e) => {
             if (e.target.nodeName !== 'TD') return;
             let index = parseInt(e.target.dataset.index);
-            elementColorChange(tdSet, index, now, '#FFD814');
+            elementColorChange(tdSet, index, now, groupColor);
             now = index;
         });
 
         window.addEventListener('keydown', (e) => {
             if (!$numberTable) return;
             if (isNaN(e.key)) {
-                console.log(e.key);
                 if (e.key === 'Backspace') {
                     tdSet[now].dataset.number = '';
                     tdSet[now].textContent = '';
                     if (now - 1 < 0) {
-                        elementColorChange(tdSet, tdSet.length - 1, now, '#FFD814');
+                        elementColorChange(tdSet, tdSet.length - 1, now,groupColor);
                         now = tdSet.length - 1;
                     } else {
-                        elementColorChange(tdSet, now - 1, now, '#FFD814');
+                        elementColorChange(tdSet, now - 1, now,groupColor);
                         now = now - 1;
                     }
                 }
                 if (e.key === 'ArrowLeft') {
                     if (now - 1 < 0) {
-                        elementColorChange(tdSet, tdSet.length - 1, now, '#FFD814');
+                        elementColorChange(tdSet, tdSet.length - 1, now, groupColor);
                         now = tdSet.length - 1;
                     } else {
-                        elementColorChange(tdSet, now - 1, now, '#FFD814');
+                        elementColorChange(tdSet, now - 1, now, groupColor);
                         now = now - 1;
                     }
                 }
 
                 if (e.key === 'Enter' || e.key === 'ArrowRight') {
                     if (now + 1 >= tdSet.length) {
-                        elementColorChange(tdSet, 0, now, '#FFD814');
+                        elementColorChange(tdSet, 0, now, groupColor);
                         now = 0;
                     } else {
-                        elementColorChange(tdSet, now + 1, now, '#FFD814');
+                        elementColorChange(tdSet, now + 1, now, groupColor);
                         now = now + 1;
                     }
                 }
@@ -214,10 +213,10 @@ export default class Number {
                 tdSet[now].dataset.number = e.key;
                 tdSet[now].textContent = e.key;
                 if (now + 1 >= tdSet.length) {
-                    elementColorChange(tdSet, 0, now, '#FFD814');
+                    elementColorChange(tdSet, 0, now, groupColor);
                     now = 0;
                 } else {
-                    elementColorChange(tdSet, now + 1, now, '#FFD814');
+                    elementColorChange(tdSet, now + 1, now, groupColor);
                     now = now + 1;
                 }
             }
@@ -231,10 +230,10 @@ export default class Number {
             tdSet[now].textContent = number;
             tdSet[now].dataset.number = number;
             if (now + 1 >= tdSet.length) {
-                elementColorChange(tdSet, 0, now, '#FFD814');
+                elementColorChange(tdSet, 0, now, groupColor);
                 now = 0;
             } else {
-                elementColorChange(tdSet, now + 1, now, '#FFD814');
+                elementColorChange(tdSet, now + 1, now, groupColor);
                 now = now + 1;
             }
         });
@@ -251,7 +250,6 @@ export default class Number {
         let resultSet = [...this.$gamecontainer.querySelector('.recall-number-table').getElementsByTagName('td')].map((td) => {
             return [td.dataset.number, parseInt(td.dataset.index)];
         });
-        console.log(resultSet.length, "결과 크기");
         const numberList = this.data.numberList;
         const total = numberList.length;
         let count = total;
@@ -265,7 +263,6 @@ export default class Number {
             } else {
                 resultSet[i][0] += number;
             }
-            // console.log(resultSet[i][0]);
         }
 
         this.$parent.innerHTML = '';

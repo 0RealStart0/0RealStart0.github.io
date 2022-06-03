@@ -8,6 +8,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 
+:root{
+    --group-color: white;
+    --main-background-color :aliceblue ;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #222225;
+        --font-color: #e8e9ed;
+        --invert-font-color: #222225;
+        --secondary-color: #a3abba;
+        --tertiary-color: #a3abba;
+        --primary-color: #62c4ff;
+        --error-color: #ff3c74;
+        --progress-bar-background: #3f3f44;
+        --progress-bar-fill: #62c4ff;
+        --code-bg-color: #3f3f44;
+        --input-style: solid;
+        --display-h1-decoration: none;
+        --group-color : var(--primary-color);
+        --main-background-color :#3f3f44;
+    }    
+  
+}
+
+.dark{
+    --background-color: #222225;
+    --font-color: #e8e9ed;
+    --invert-font-color: #222225;
+    --secondary-color: #a3abba;
+    --tertiary-color: #a3abba;
+    --primary-color: #62c4ff;
+    --error-color: #ff3c74;
+    --progress-bar-background: #3f3f44;
+    --progress-bar-fill: #62c4ff;
+    --code-bg-color: #3f3f44;
+    --input-style: solid;
+    --display-h1-decoration: none;
+    --group-color : var(--primary-color);
+    --main-background-color :#3f3f44;
+}
+
 /* .nes-btn,
 .nes-input,
 .nes-select select,
@@ -24,16 +66,18 @@
     /* box-sizing: border-box; */
     /* box-sizing: border-box; */
   /* } */ 
-
-body {
+  body {
     font-family: 'NeoDunggeunmo', sans-serif;
     letter-spacing: 0.05em;
+    
+    
     /* font-size: calc(var(--global-font-size)*1.1); */
     /* display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column; */
   }
+
 .components-flex{
     display: flex;
     flex-direction: row;
@@ -43,7 +87,7 @@ body {
 
 /* 섹션 배경색 설정(나중에 겹치면 클래스 설정해야할듯? */
 main {
-    background-color: aliceblue;
+    background-color: var(--main-background-color);
 }
 /* 설정부분 마진 */
 .setting-fieldset > fieldset{
@@ -147,9 +191,9 @@ table tbody td:first-child {
 /* 단어 리콜 테이블 인풋 안보이게 설정 */
 .recall-word-table input{
     padding: 0px;
-    background-color: aliceblue;
+    background-color: var(--main-background-color);
     border: 0;
- font-family: inherit;
+    font-family: inherit;
 }
 
 /* 단어 리콜 테이블 인풋 안보이게 설정 */
