@@ -50,6 +50,15 @@
     --main-background-color :#3f3f44;
 }
 
+/* .terminal .logo, .terminal blockquote, .terminal code, .terminal h1, .terminal h2, .terminal h3, .terminal h4, .terminal h5, .terminal h6, .terminal strong {
+    font-size: var(--global-font-size);
+    font-style: normal;
+    font-family: var(--font-stack);
+    color: var(--font-color);
+    font-weight: 600;
+    margin-bottom: var(--global-line-height);
+} */
+
 /* .nes-btn,
 .nes-input,
 .nes-select select,
