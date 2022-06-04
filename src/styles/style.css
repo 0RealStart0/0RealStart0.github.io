@@ -78,7 +78,12 @@
   body {
     font-family: 'NeoDunggeunmo', sans-serif;
     letter-spacing: 0.05em;
-    
+    -ms-user-select: none; 
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none;
+     user-select:none;
+
     
     /* font-size: calc(var(--global-font-size)*1.1); */
     /* display: flex;
