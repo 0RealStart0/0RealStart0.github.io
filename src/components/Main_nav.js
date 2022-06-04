@@ -31,7 +31,7 @@ export default class Main_nav {
                             <ul>
                                 <li><a class="menu-item" href="/practice">연습하기</a></li>
                                 <li><a class="menu-item" href="/multiplay">대결하기</a></li>
-                                <li class="dark-mode"></li>
+                                <li class="dark-mode">⚪️</li>
                             </ul>
                             </nav>
                         </div>`;
@@ -62,8 +62,8 @@ export default class Main_nav {
         this.currentMode = getCookie('isDark');
         if (!this.currentMode) {
             this.currentMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light";
+            ? "dark"
+            : "light";
         } else {
             if (this.currentMode === 'dark') {
                 document.querySelector('body').className = 'dark';
@@ -75,8 +75,9 @@ export default class Main_nav {
                 $dark.textContent = '⚫️';
             }
         }
-
-
+        console.log(this.currentMode);
+        
+        
         $dark.addEventListener('click', (e) => {
             if (this.currentMode === 'dark') {
                 document.querySelector('body').className = 'light';
@@ -89,6 +90,7 @@ export default class Main_nav {
                 e.target.textContent = '⚪️';
                 setCookie('isDark', 'dark', { 'max-age': 86400 });
             }
+            console.log(this.currentMode);
         });
     }
 
