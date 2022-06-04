@@ -113,7 +113,6 @@ export function phase1Helper(color, groupLength, name){
         phase2.bind(this)();
     });
     function phase2() {
-        console.log('페이즈2');
     
         const tpl = document.createElement('template');
         tpl.innerHTML = memory;

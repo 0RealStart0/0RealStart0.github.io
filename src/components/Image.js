@@ -82,7 +82,6 @@ export default class Image {
     }
 
     phase3(record) {
-        console.log('페이즈3');
         this.$gamecontainer.innerHTML = '';
 
         //이미지 목록용 세트
@@ -148,7 +147,6 @@ export default class Image {
     }
 
     phase4($record) {
-        console.log('페이즈4');
 
         //카운트창 변경 및 리콜창 보여주기
         const tpl = document.createElement('template');
@@ -268,7 +266,6 @@ export default class Image {
     }
 
     phase5($record) {
-        console.log('페이즈5');
         let resultSet = [...this.$gamecontainer.querySelector('.image-table').getElementsByTagName('td')].map((td)=>{
             return [td.dataset.image,parseInt(td.dataset.index)];
         });

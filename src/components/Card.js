@@ -72,7 +72,6 @@ export default class Card {
     }
 
     phase3(record) {
-        console.log('페이즈3');
         this.$gamecontainer.innerHTML = '';
 
         let cardSet = getCardSet();
@@ -132,7 +131,6 @@ export default class Card {
     }
 
     phase4($record) {
-        console.log('페이즈4');
 
         //카운트창 변경 및 리콜창 보여주기
         const tpl = document.createElement('template');
@@ -272,7 +270,6 @@ export default class Card {
     }
 
     phase5($record) {
-        console.log('페이즈5');
         let resultSet = [...this.$gamecontainer.querySelector('.card-table').getElementsByTagName('td')].map((td)=>{
             return [td.dataset.card,parseInt(td.dataset.index)];
         });

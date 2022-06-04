@@ -79,7 +79,6 @@ export default class Number {
     }
 
     phase3(record) {
-        console.log('페이즈3');
         this.$gamecontainer.innerHTML = '';
 
         // let cardSet = getCardSet();
@@ -129,7 +128,6 @@ export default class Number {
     }
 
     phase4($record) {
-        console.log('페이즈4');
 
         //카운트창 변경 및 리콜창 보여주기
         const tpl = document.createElement('template');
@@ -246,7 +244,6 @@ export default class Number {
     }
 
     phase5($record) {
-        console.log('페이즈5');
         let resultSet = [...this.$gamecontainer.querySelector('.recall-number-table').getElementsByTagName('td')].map((td) => {
             return [td.dataset.number, parseInt(td.dataset.index)];
         });
@@ -303,7 +300,7 @@ export default class Number {
         const $gameStatus = this.$gamecontainer.querySelector('.game-status');
         $gameStatus.appendChild($result);
         $gameStatus.appendChild($record);
-        
+
         $gameStatus.querySelector('.btn').addEventListener('click',(e)=>{
             this.$parent.innerHTML = '';
             this.render();

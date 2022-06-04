@@ -70,7 +70,6 @@ export default class Word {
     }
 
     phase3(record) {
-        console.log('페이즈3!');
         this.$gamecontainer.innerHTML = '';
 
         let recallWordTable = `
@@ -106,7 +105,6 @@ export default class Word {
 
 
     phase4($record) {
-        console.log('페이즈4');
 
         //카운트창 변경 및 리콜창 보여주기
         const tpl = document.createElement('template');
@@ -163,7 +161,6 @@ export default class Word {
     }
 
     phase5($record) {
-        console.log('페이즈5');
         let resultSet = [...this.$gamecontainer.getElementsByTagName('input')].map((input)=>{
             return [input.value.trim(),parseInt(input.tabIndex)-1];
         });

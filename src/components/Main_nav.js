@@ -13,7 +13,6 @@ export default class Main_nav {
 
 
     render() {
-        console.log('render');
         this.$target.innerHTML = '';
         this.$nav = document.createElement('div');
         this.$nav.className = 'container';
@@ -31,7 +30,7 @@ export default class Main_nav {
                             <ul>
                                 <li><a class="menu-item" href="/practice">연습하기</a></li>
                                 <li><a class="menu-item" href="/multiplay">대결하기</a></li>
-                                <li class="dark-mode">⚪️</li>
+                                <li class="dark-mode"></li>
                             </ul>
                             </nav>
                         </div>`;
@@ -42,7 +41,6 @@ export default class Main_nav {
             // if (e.target.className !== 'menu-item') return;
             e.preventDefault();
             history.pushState(null, null, e.target.href);
-            console.log(e.target.href, location.pathname);
             // if (e.target.href.pathname === location.pathname) {
             //     console.log('리턴');
             //     return;
@@ -60,24 +58,24 @@ export default class Main_nav {
         const $dark = this.$nav.querySelector('.dark-mode');
 
         this.currentMode = getCookie('isDark');
-        console.log(this.currentMode);
         if (!this.currentMode) {
             this.currentMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        } else {
-            if (this.currentMode === 'dark') {
-                document.querySelector('body').className = 'dark';
-                this.currentMode = 'dark';
-                $dark.textContent = '⚪️';
-            } else {
-                document.querySelector('body').className = 'light';
-                this.currentMode = 'light';
-                $dark.textContent = '⚫️';
-            }
+                ? "dark"
+                : "light";
         }
-        
-        
+
+        if (this.currentMode === 'dark') {
+            document.querySelector('body').className = 'dark';
+            this.currentMode = 'dark';
+            $dark.textContent = '⚪️';
+        } else {
+            document.querySelector('body').className = 'light';
+            this.currentMode = 'light';
+            $dark.textContent = '⚫️';
+        }
+
+
+
         $dark.addEventListener('click', (e) => {
             if (this.currentMode === 'dark') {
                 document.querySelector('body').className = 'light';
@@ -90,15 +88,13 @@ export default class Main_nav {
                 e.target.textContent = '⚪️';
                 setCookie('isDark', 'dark', { 'max-age': 86400 });
             }
-            console.log(this.currentMode);
         });
     }
 
     resetChild() {
-        console.log('reset');
         this.$child.innerHTML = ``;
-        
-        
+
+
     }
 
 }
