@@ -233,6 +233,12 @@ export default class Word {
         $gameStatus.appendChild($result);
         $gameStatus.appendChild($record);
 
+        $gameStatus.querySelector('.btn').addEventListener('click',(e)=>{
+            this.$parent.innerHTML = '';
+            this.render();
+        }); 
+
+
         this.$parent.appendChild(this.$gamecontainer);
 
 
