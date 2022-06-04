@@ -60,6 +60,7 @@ export default class Main_nav {
         const $dark = this.$nav.querySelector('.dark-mode');
 
         this.currentMode = getCookie('isDark');
+        console.log(this.currentMode);
         if (!this.currentMode) {
             this.currentMode = window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
@@ -75,7 +76,6 @@ export default class Main_nav {
                 $dark.textContent = '⚫️';
             }
         }
-        console.log(this.currentMode);
         
         
         $dark.addEventListener('click', (e) => {
