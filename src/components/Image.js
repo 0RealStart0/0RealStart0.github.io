@@ -280,10 +280,10 @@ export default class Image {
 
             if(imageList[i]!==image){
                 count--;
-                resultSet[i][0] += `${image ? `<del>${image}</del>` : `<span style="color:#151515">✘</span>` }`;
+                resultSet[i][0] += `${image ? `<del>${image}</del>` : `<span>✘</span>` }`;
                 
             }else{
-                resultSet[i][0] += `<span style="color:#151515">✔</span>`;
+                resultSet[i][0] += `<span>✔</span>`;
                 
             }
             // console.log(resultSet[i][0]);

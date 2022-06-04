@@ -286,10 +286,10 @@ export default class Card {
             </span><br>`;
             if(cardList[i]!==card){
                 count--;
-                resultSet[i][0] += `${card ? `<del>${card}</del>` : `<span style="color:#151515">✘</span>` }`;
+                resultSet[i][0] += `${card ? `<del>${card}</del>` : `<span style="color:var(--font-color);">✘</span>` }`;
                 
             }else{
-                resultSet[i][0] += `<span style="color:#151515">✔</span>`;
+                resultSet[i][0] += `<span style="color:var(--font-color);">✔</span>`;
                 
             }
             // console.log(resultSet[i][0]);
