@@ -25,15 +25,15 @@ export function timer(time, $element, fnc) {
 
     let $progerssBar = $element.querySelector('.progress-bar-filled');
     // let $progerssBarArrow = $element.querySelector('.progress-bar-filled::before');
-
     let interval = setInterval(() => {
         time -= 1;
         minutes = Math.floor(time / 60);
         seconds = time % 60;
-
+        
+        // console.log('실행됨?')
         if (!hurryFlag && time<=60) {
             hurryFlag = true;
-
+            
             if($progerssBar){
                 $progerssBar.style.backgroundColor = '#F74603';
             }
@@ -41,12 +41,12 @@ export function timer(time, $element, fnc) {
             if ($timeSpan.parentNode.className === 'memory-time') {
                 $timeSpan.style.color = '#F74603';
             }
-
+            
         }
-
+        
         $timeSpan.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-
-
+        
+        
         if ($progerssBar) {
             $progerssBar.style.width = Math.round((time / startTime) * 10000) / 100 + '%';
         }
@@ -55,7 +55,8 @@ export function timer(time, $element, fnc) {
             fnc(this.$record);
         }
     }, 1000);
-
+    
+    // console.log('1')
     return interval;
 }
 

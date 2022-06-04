@@ -308,3 +308,36 @@ background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"
 .recall-word-table{
     font-size: 18px;
 }
+
+.table-container.image{
+    margin: 0 6px;
+}
+
+.image-table{
+    font-size: 26px;
+    text-align: center;
+    margin: 0.8em 0;
+}
+.recall-image-table td{
+    width: 48.45px;
+    height: 48.4px;
+}
+
+.recall-image-list table{
+    margin: 0;
+}
+.recall-image-list td{
+    font-size: 26px;
+    text-align: center;
+    width: 48.45px;
+    height: 48.4px;
+}
+
+
+.container-recall-image-selector{
+    overflow: auto;
+    height: 200px;
+}
+.recall-image-list{
+    margin: 0 6px;
+}
